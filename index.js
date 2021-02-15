@@ -24,7 +24,6 @@ var getConnections = async () => {
         connection.topic = response.topic
 
         connection.on( 'connect', () =>{
-          console.log(response.topic)
           connection.subscribe(response.topic)
         } )
         connection.on('message', sendMeansurements)
@@ -39,7 +38,6 @@ var getConnections = async () => {
 const sendMeansurements = function (topic, message, packet) {
   const object = JSON.parse(message);
   const {authorization} = object
-  console.log(object)
   axios.post('http://localhost:3001/meansurements',object ,{
     headers: {
       authorization
